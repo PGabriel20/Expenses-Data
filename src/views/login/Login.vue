@@ -17,8 +17,13 @@
           <p class="text-red-500 text-xs italic">Please choose a password.</p>
         </div>
         <div class="flex flex-col">
-          <button class="bg-featured hover:bg-featuredDark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-            Sign In
+          <button class="bg-featured hover:bg-featuredDark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" :disabled="loading">
+            <template v-if="loading">
+              <i class="fa fa-spinner fa-spin"></i>
+            </template>
+            <template v-else>
+              Sign In
+            </template>
           </button>
           <a class="text-center inline-block align-baseline font-bold text-sm text-darkMedium hover:text-darker mt-4" href="#">
             Forgot Password?
@@ -36,6 +41,7 @@ export default {
 
   data () {
     return {
+      loading: false,
       email: '',
       password: ''
     }
@@ -45,11 +51,17 @@ export default {
       const { email, password } = this
       const auth = getAuth()
 
+      this.loading = true
+
       try {
-        const request = await signInWithEmailAndPassword(auth, email, password)
-        console.log(request)
+        const response = await signInWithEmailAndPassword(auth, email, password)
+
+        window.uid = response.user.uid
+
+        this.$router.push({ name: 'home' })
+        this.loading = false
       } catch (error) {
-        console.log(error)
+        this.loading = false
       }
     }
   }
