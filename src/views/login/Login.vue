@@ -17,7 +17,7 @@
           <p class="text-red-500 text-xs italic">Please choose a password.</p>
         </div>
         <div class="flex flex-col">
-          <button class="bg-featured hover:bg-featuredDark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" :disabled="loading">
+          <button :disabled="loading" class="bg-featured hover:bg-featuredDark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" >
             <template v-if="loading">
               <i class="fa fa-spinner fa-spin"></i>
             </template>
@@ -62,8 +62,16 @@ export default {
         this.loading = false
       } catch (error) {
         this.loading = false
+        console.log(error)
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (window.uid) {
+        vm.$router.push({ name: 'home' })
+      }
+    })
   }
 }
 </script>

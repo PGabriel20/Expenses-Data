@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    name: 'home',
     path: '/',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -12,6 +13,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/home/Home')
   },
   {
+    name: 'login',
     path: '/login',
     component: () => import(/* webpackChunkName: "about" */ '../views/login/Login')
   }
@@ -19,6 +21,14 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (!window.uid && to.name !== 'login') {
+    next({ name: 'login' })
+  } else {
+    next()
+  }
 })
 
 export default router
