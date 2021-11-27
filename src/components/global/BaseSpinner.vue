@@ -11,17 +11,13 @@
 export default {
   data () {
     return {
-      visible: false
+      visible: true
     }
   },
   created () {
-    this.$root.$on('Spinner::show', () => {
-      this.visible = true
-    })
+    this.$root.$on('Spinner::show', () => { this.visible = true })
 
-    this.$root.$on('Spinner::hide', () => {
-      this.visible = false
-    })
+    this.$root.$on('Spinner::hide', () => { this.visible = false })
   }
 }
 </script>
