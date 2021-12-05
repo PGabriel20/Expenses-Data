@@ -9,4 +9,8 @@
 
 button, a{
   cursor: pointer;
+
+  &:hover{
+    transition: all 0.2s;
+  }
 }

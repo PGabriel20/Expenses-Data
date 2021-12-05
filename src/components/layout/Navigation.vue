@@ -6,7 +6,7 @@
   <div class="w-64 navigationMenu text-white">
       <router-link
         :key="i"
-        class="mb-2 mt-2 p-2 pl-4 flex items-center hover:bg-featured hover:text-dark transition duration-150"
+        class="mb-2 mt-2 p-2 pl-4 flex items-center hover:bg-featured hover:text-dark"
         v-for="(router, i) in routerLinks"
         :to="{ name: router.name }"
         exact-active-class="text-featured"
