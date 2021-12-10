@@ -24,7 +24,7 @@ const routes = [
   {
     name: 'lista-gastos',
     path: '/lista-gastos  ',
-    meta: { title: 'Lista Gastos', icon: 'list-ul' },
+    meta: { title: 'Expenses List', icon: 'list-ul' },
     component: () => import(/* webpackChunkName: "about" */ '../views/lista-gastos/ListaGastos')
   }
 ]
